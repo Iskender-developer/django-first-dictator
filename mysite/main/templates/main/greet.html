@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/greet/" method="post">
+        {% csrf_token %}
+        <label for="username">Enter your name:</label>
+        <input id="username" type="text" name="username">
+
+        <button type="submit">send</button>
+    </form>
+    {% if name_used %}
+        <p>Hello {{name_used}}, nice to meet you😁</p>
+    {% endif %}
+</body>
+</html>

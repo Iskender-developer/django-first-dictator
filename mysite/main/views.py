@@ -24,11 +24,26 @@ def about(request):
 
 def contact(request):
     if request.method == "POST":
-        input_name = request.POST.get("user_name")
+        input_name = request.POST.get("user_name", "").strip()
 
         return render(request, "main/contact.html", {
             "submited_name": input_name
         })
 
+
     return render(request, "main/contact.html")
+
+def greet(request):
+    if request.method == "POST":
+        input_username = request.POST.get("username", '').strip()
+        if input_username == "":
+            return render(request, "main/greet.html", {
+                "name_used": "Username required"
+            })
+        else:
+            return render(request, "main/greet.html", {
+                "name_used": input_username
+            })
+
+    return  render(request, "main/greet.html")
 
