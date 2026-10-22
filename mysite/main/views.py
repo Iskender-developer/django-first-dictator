@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def home(request):
@@ -24,4 +23,12 @@ def about(request):
 
 
 def contact(request):
-    return HttpResponse("contact")
+    if request.method == "POST":
+        input_name = request.POST.get("user_name")
+
+        return render(request, "main/contact.html", {
+            "submited_name": input_name
+        })
+
+    return render(request, "main/contact.html")
+

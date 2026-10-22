@@ -5,6 +5,14 @@
     <title>Title</title>
 </head>
 <body>
+    <form action="/contact/" method="POST">
+    {% csrf_token %}
 
+    <label for="username">Enter your name:</label>
+    <input type="text" id="username" name="user_name" required>
+
+    <button type="submit">Send</button>
+</form>
+    <h3>{{submited_name}}</h3>
 </body>
 </html>
