@@ -5,7 +5,8 @@ def home(request):
     links = [
         {"title": "Home", "url": "http://127.0.0.1:8000/"},
         {"title": "about", "url": "http://127.0.0.1:8000/about"},
-        {"title": "contact", "url": "http://127.0.0.1:8000/contact"}
+        {"title": "contact", "url": "http://127.0.0.1:8000/contact"},
+        {"title": "greet", "url": "http://127.0.0.1:8000/greet"}
     ]
 
     context = {"link": links}
@@ -34,16 +35,19 @@ def contact(request):
     return render(request, "main/contact.html")
 
 def greet(request):
-    if request.method == "POST":
-        input_username = request.POST.get("username", '').strip()
-        if input_username == "":
-            return render(request, "main/greet.html", {
-                "name_used": "Username required"
-            })
-        else:
-            return render(request, "main/greet.html", {
-                "name_used": input_username
-            })
+    input_username = ""
+    error = ""
 
-    return  render(request, "main/greet.html")
+    if request.method == "POST":
+        input_username = request.POST.get("username", "").strip()
+
+        if input_username == "":
+            error = "Username required"
+
+    context = {
+        "name_used": input_username,
+        "error": error,
+    }
+
+    return render(request, "main/greet.html", context)
 

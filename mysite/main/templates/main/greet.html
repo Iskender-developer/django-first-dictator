@@ -5,15 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/greet/" method="post">
-        {% csrf_token %}
-        <label for="username">Enter your name:</label>
-        <input id="username" type="text" name="username">
+<form action="/greet/" method="post">
+    {% csrf_token %}
+    <label for="username">Enter your name:</label>
+    <input id="username" type="text" name="username">
 
-        <button type="submit">send</button>
-    </form>
-    {% if name_used %}
-        <p>Hello {{name_used}}, nice to meet you😁</p>
-    {% endif %}
+    <button type="submit">send</button>
+</form>
+{% if error %}
+<p>{{ error }}</p>
+{% elif name_used %}
+<p>Hello {{ name_used }}</p>
+{% endif %}
 </body>
 </html>
